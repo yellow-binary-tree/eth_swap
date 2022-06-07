@@ -1,5 +1,6 @@
 const Token = artifacts.require("Token");
 const EthSwap = artifacts.require("EthSwap");
+const Courses = artifacts.require("Courses");
 
 module.exports = async function(deployer) {
   // Deploy Token
@@ -12,4 +13,8 @@ module.exports = async function(deployer) {
 
   // Transfer all tokens to EthSwap (1 million)
   await token.transfer(ethSwap.address, '1000000000000000000000000')
+
+  // Deploy Courses
+  await deployer.deploy(Courses);
+  const courses = await Courses.deployed()
 };
